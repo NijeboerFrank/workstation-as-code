@@ -25,7 +25,8 @@ certain installation scripts (e.g., `dnf` commands).
 The `--tags` specifies the tasks which will be run with the ansible command.
 There is also the `--skip-tags` option, which allows you to omit certain tags.
 
-For example, if you want to install all the tools, except `zoxide` you should do:
+For example, if you want to install all the tools, except `zoxide` you should
+do:
 
 ```bash
 ansible-playbook -i hosts -K bootstrap.yml --tags cli-tools --skip-tags zoxide
@@ -39,7 +40,8 @@ install each one separately if you wish.
 Available tags are:
 
 **CLI Tools**
-- `cli-tools` :arrow_right: *Install all of the following*
+
+- `cli-tools` :arrow*right: \_Install all of the following*:
 - `helix`
 - `fish`
 - `lf`
@@ -50,9 +52,17 @@ Available tags are:
 - `just`
 
 **Programming Languages**
-- `languages` :arrow_right: *Install all of the following*
+
+- `languages` :arrow*right: \_Install all of the following*:
 - `docker`
 - `markdown`
+
+**Gnome**
+
+- `gnome` :arrow*right: \_Install all of the following*:
+- `gnome-look`
+- `gnome-apps`
+- `gsettings`
 
 ## Creating New Roles
 

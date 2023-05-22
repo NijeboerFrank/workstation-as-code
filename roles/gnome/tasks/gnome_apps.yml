@@ -1,0 +1,49 @@
+- name: Add the flathub flatpak repository remote to the user installation
+  community.general.flatpak_remote:
+    name: flathub
+    state: present
+    flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+    method: user
+
+- name: Install FlatHub Apps
+  community.general.flatpak:
+    name:
+      - dev.alextren.Spot
+      - com.gitlab.newsflash
+      - org.gnome.World.Secrets
+      - org.nickvision.money
+      - com.calibre_ebook.calibre
+      - org.zotero.Zotero 
+      - com.logseq.Logseq
+      - com.mattjakeman.ExtensionManager
+      - ca.desrt.dconf-editor
+      - com.slack.Slack
+      - org.gnome.Evolution
+    state: present
+    method: user
+
+- name: Installing Nextcloud
+  become: yes
+  dnf:
+    name:
+      - nextcloud-client
+      - nextcloud-client-libs
+      - nextcloud-client-nautilus
+
+- name: Remove unnecessary programs
+  become: yes
+  dnf:
+    name:
+      - gnome-terminal
+      - gnome-terminal-nautilus
+    state: absent
+
+# Gnome Console
+- name: Configure Gnome Console
+  dconf:
+    key: "{{ item.key }}"
+    value: "{{ item.value }}"
+  loop:
+    - { key: "/org/gnome/Console/shell", value: "['/bin/fish']"}
+    - { key: "/org/gnome/Console/theme", value: "'auto'"}
+

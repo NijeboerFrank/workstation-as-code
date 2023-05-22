@@ -1,0 +1,23 @@
+workspaces:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+
+# Where software is stored
+software_dir: ~/Software
+
+# Font settings
+fonts_dir: ~/.fonts
+fonts:
+  - { name: Iosevka, url: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/Iosevka.zip, glob: "*Iosevka*Nerd*" }
+  - { name: Ubuntu Mono, url: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/UbuntuMono.zip, glob: "*Ubuntu*Mono*Nerd*"}
+  - { name: Droid Sans Mono, url: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/DroidSansMono.zip, glob: "*Droid*Sans*Mono*Nerd*"}
+  - { name: Fura Mono, url: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/FiraMono.zip, glob: "*Fura*Mono*Nerd*"}
+  - { name: Fira Code, url: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/FiraCode.zip, glob: "*Fira*Code*Nerd*"}
+

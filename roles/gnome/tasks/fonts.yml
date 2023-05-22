@@ -1,0 +1,18 @@
+- name: Make sure that fonts directory exists
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.fonts"
+    state: directory
+
+- name: See if {{ font.name }} is installed
+  find: 
+    paths: "{{ fonts_dir }}" 
+    patterns: 
+      - "{{ font.glob }}"
+  register: font_exists
+
+- name: Download font
+  when: font_exists.matched == 0
+  ansible.builtin.unarchive:
+    src: "{{ font.url }}"
+    dest: "{{ fonts_dir }}"
+    remote_src: yes

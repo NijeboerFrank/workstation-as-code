@@ -16,7 +16,7 @@
       dest: "{{ lf_location }}"
   - name: Give the file executable permissions
     ansible.builtin.file:
-      path: "{{ lf_location }}"
+      path: "{{ lf_location }}/lf"
       mode: +x
   when: lf_output is failed or lf_output.stdout != lf_version
 

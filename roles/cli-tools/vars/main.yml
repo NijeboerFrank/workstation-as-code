@@ -1,4 +1,4 @@
 lf_version: r29
-lf_location: "{{ user_home }}/.local/bin/"
+lf_location: "{{ user_bin }}"
 
 bartib_source_dir: "{{ user_home }}/Documents/1 Projects/bartib"
