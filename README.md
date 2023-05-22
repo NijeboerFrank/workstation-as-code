@@ -64,6 +64,16 @@ Available tags are:
 - `gnome-apps`
 - `gsettings`
 
+## Configuration
+
+You can overwrite some Ansible vars in another yaml file, which you can then
+include in the "play" by using the `--extra-vars` option, followed by the file
+with your yaml variables prefixed with `@`. So, for example:
+
+```bash
+ansible-playbook -i hosts -K bootstrap.yml --extra-vars @my_config.yml
+```
+
 ## Creating New Roles
 
 Creating a new role is simple: just create a directory with the desired role
