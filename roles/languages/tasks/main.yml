@@ -3,7 +3,28 @@
   tags:
     - docker
 
+- name: Install and configure python
+  import_tasks: python.yml
+  tags:
+    - python
+
+- name: Install and configure node
+  import_tasks: node.yml
+  tags:
+    - node
+
+- name: Install and configure rust
+  import_tasks: rust.yml
+  tags:
+    - rust
+
+- name: Install and configure yaml
+  import_tasks: yaml.yml
+  tags:
+    - yaml
+
 - name: Install and configure markdown
   import_tasks: markdown.yml
   tags:
     - markdown
+

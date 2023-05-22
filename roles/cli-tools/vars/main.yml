@@ -2,3 +2,7 @@ lf_version: r29
 lf_location: "{{ user_bin }}"
 
 bartib_source_dir: "{{ user_home }}/Documents/1 Projects/bartib"
+
+# I have my own fork of bartib, but you could use the original
+# bartib_remote_repo: "https://github.com/nikolassv/bartib"
+bartib_remote_repo: "git@github.com:NijeboerFrank/bartib.git"

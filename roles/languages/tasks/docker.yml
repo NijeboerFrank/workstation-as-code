@@ -53,3 +53,15 @@
     name: docker
     state: started
     enabled: yes
+
+- name: Install dockerfile lang server
+  block:
+
+    - name: Check npm
+      include_tasks: "{{ languages_dir }}/node.yml"
+    - name: Install dockerfile lang server
+      community.general.npm:
+        name: dockerfile-language-server-nodejs
+        global: true
+  tags:
+    - lsp
