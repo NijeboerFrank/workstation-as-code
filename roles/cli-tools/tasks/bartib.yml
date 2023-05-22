@@ -1,0 +1,42 @@
+- name: check if cargo is installed
+  shell: command -v cargo
+  register: cargo_exists
+  ignore_errors: yes
+  changed_when: false
+
+- name: Download cargo installer
+  when: cargo_exists is failed
+  get_url:
+    url: https://sh.rustup.rs
+    dest: /tmp/sh.rustup.rs
+    mode: '0755'
+    force: 'yes'
+
+- name: install rust/cargo
+  when: cargo_exists is failed
+  shell: /tmp/sh.rustup.rs -y
+
+- name: Get my fork of bartib
+  ansible.builtin.git:
+    repo: git@github.com:NijeboerFrank/bartib.git
+    dest: "{{ bartib_source_dir }}"
+    single_branch: yes
+    version: master
+
+- name: Check whether the fish completions directory exists
+  ansible.builtin.file:
+    path: "{{ xdg_config_dir }}/fish/completions"
+    state: directory
+
+- name: Install local bartib
+  community.general.cargo:
+    name: bartib
+    path: "{{ bartib_source_dir }}"
+
+- name: Link the bartib completions from there
+  ansible.builtin.file:
+    src: "{{ bartib_source_dir }}/misc/bartib.fish"
+    dest: "{{ xdg_config_dir }}/fish/completions/bartib.fish"
+    state: link
+    force: yes
+

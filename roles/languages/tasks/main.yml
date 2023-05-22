@@ -1,0 +1,9 @@
+- name: Install and configure docker
+  import_tasks: docker.yml
+  tags:
+    - docker
+
+- name: Install and configure markdown
+  import_tasks: markdown.yml
+  tags:
+    - markdown

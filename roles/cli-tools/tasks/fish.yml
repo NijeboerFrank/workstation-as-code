@@ -1,0 +1,48 @@
+- name: Install fish
+  become: yes
+  ansible.builtin.dnf:
+    name: fish
+    state: latest
+
+- name: "Test whether {{ xdg_config_dir }}/fish dir exists"
+  ansible.builtin.file:
+    path: "{{ xdg_config_dir }}/fish"
+    state: directory
+
+- name: Link the fish configuration file
+  ansible.builtin.file:
+    src: "{{ wac_dir }}/roles/cli-tools/fish/config.fish"
+    dest: "{{ xdg_config_dir }}/fish/config.fish"
+    state: link
+    force: true
+
+- name: Link the fish variables file
+  ansible.builtin.file:
+    src: "{{ wac_dir }}/roles/cli-tools/fish/fish_variables"
+    dest: "{{ xdg_config_dir }}/fish/fish_variables"
+    state: link
+    force: true
+
+- name: Check if the conf.d directory exists
+  ansible.builtin.file:
+    path: "{{ xdg_config_dir }}/fish/conf.d"
+    state: directory
+
+- name: Get the 'done' fish plugin
+  ansible.builtin.get_url:
+    url: https://raw.githubusercontent.com/franciscolourenco/done/master/conf.d/done.fish
+    dest: "{{ xdg_config_dir }}/fish/conf.d/done.fish"
+  
+- name: Install the starship prompt
+  block:
+    - name: Enable starship copr
+      become: yes
+      community.general.copr:
+        name: atim/starship
+        state: enabled
+    - name: Install starship
+      become: yes
+      ansible.builtin.dnf:
+        name: starship
+        state: latest
+  

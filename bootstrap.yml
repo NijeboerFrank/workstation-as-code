@@ -1,0 +1,7 @@
+---
+- name: Set up developing environment
+  hosts: local
+  roles: 
+    - { role: update, tags: ['update'] }
+    - { role: cli-tools, tags: ['cli-tools'] }
+    - { role: languages, tags: ['languages'] }

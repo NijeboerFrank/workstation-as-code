@@ -1,0 +1,27 @@
+- name: Ensure pip is installed and latest version
+  become: yes
+  ansible.builtin.dnf:
+    name:
+      - python
+      - python3-pip
+    state: latest
+
+# Formatting
+- name: Install mdformat
+  ansible.builtin.pip:
+    name: 
+      - mdformat-gfm
+      - mdformat-frontmatter
+      - mdformat-footnote
+    state: latest
+
+# Language Server
+- name: Get the Marksman LSP
+  ansible.builtin.get_url:
+    url: https://github.com/artempyanykh/marksman/releases/download/2023-04-12/marksman-linux  
+    dest: ~/.local/bin/marksman
+    checksum: sha256:1dc68bc8b45ccfd775a3598fb557797cbaad6a1bb5347da83ce654561550319a
+- name: Make Marksman Executable
+  ansible.builtin.file:
+    path: ~/.local/bin/marksman
+    mode: +x
