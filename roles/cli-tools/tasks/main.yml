@@ -44,3 +44,7 @@
   tags:
     - just
 
+- name: Install todo.sh
+  import_tasks: "todo.sh.yml"
+  tags:
+    - todo.sh

@@ -41,7 +41,7 @@ Available tags are:
 
 **CLI Tools**
 
-- `cli-tools` :arrow*right: \_Install all of the following*:
+- `cli-tools` :arrow_right: *Install all of the following*:
 - `helix`
 - `fish`
 - `lf`
@@ -50,16 +50,17 @@ Available tags are:
 - `exa`
 - `bartib`
 - `just`
+- `todo.sh`
 
 **Programming Languages**
 
-- `languages` :arrow*right: \_Install all of the following*:
+- `languages` :arrow_right: *Install all of the following*:
 - `docker`
 - `markdown`
 
 **Gnome**
 
-- `gnome` :arrow*right: \_Install all of the following*:
+- `gnome` :arrow_right: *Install all of the following*:
 - `gnome-look`
 - `gnome-apps`
 - `gsettings`
@@ -71,8 +72,14 @@ include in the "play" by using the `--extra-vars` option, followed by the file
 with your yaml variables prefixed with `@`. So, for example:
 
 ```bash
-ansible-playbook -i hosts -K bootstrap.yml --extra-vars @my_config.yml
+ansible-playbook -i hosts -K bootstrap.yml --extra-vars @private_config.yml
 ```
+
+I put my own overrides in `private_config.yml`, which I use to fully customize
+my own system without putting it all under source control.
+
+The available config options can be found under each role in the `vars`
+directory.
 
 ## Creating New Roles
 
