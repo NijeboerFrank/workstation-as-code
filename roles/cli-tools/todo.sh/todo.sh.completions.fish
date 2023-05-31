@@ -1,6 +1,8 @@
 
+# List all the commands
 set -l todo_commands ls list lsa listall lsc lsprj add addm addto append archive deduplicate del do rm pri depri help shorthelp report replace prepend
-# commands
+
+# Basic Commands
 complete -c todo.sh -f -n "not __fish_seen_subcommand_from $todo_commands" -a ls -d 'List Tasks containing TERM(s) (or not -TERM(s)).'
 complete -c todo.sh -f -n "not __fish_seen_subcommand_from $todo_commands" -a list -d 'List Tasks containing TERM(s) (or not -TERM(s)).'
 complete -c todo.sh -f -n "not __fish_seen_subcommand_from $todo_commands" -a lsa -d 'List all Tasks from todo.txt and done.txt containing TERM (or not -TERM).'
@@ -24,22 +26,23 @@ complete -c todo.sh -f -n "not __fish_seen_subcommand_from $todo_commands" -a re
 complete -c todo.sh -f -n "not __fish_seen_subcommand_from $todo_commands" -a replace -d 'Replaces task on line ITEM# with UPDATED TODO.'
 complete -c todo.sh -f -n "not __fish_seen_subcommand_from $todo_commands" -a prepend -d 'Adds TEXT TO PREPEND to the beginning of the task on line ITEM#. Quotes optional.' 
 
-# options
-complete -c todo.sh -f -a -@ -n "not __fish_seen_subcommand_from -@" -d 'Hide context names in list output. Use twice to show context names (default).'
-complete -c todo.sh -f -a -+ -n "not __fish_seen_subcommand_from -+" -d 'Hide project names in list output. Use twice to show project names (default).'
-complete -c todo.sh -f -a -c -n "not __fish_seen_subcommand_from -c" -d 'Color mode.'
-complete -c todo.sh -f -a -d -n "not __fish_seen_subcommand_from -d" -d 'Use a configuration file other than one of the defaults (e.g. ~/.config/todo/config).'
-complete -c todo.sh -f -a -f -n "not __fish_seen_subcommand_from -f" -d 'Forces actions without confirmation or interactive input.'
-complete -c todo.sh -f -a -h -n "not __fish_seen_subcommand_from -h" -d 'Display a short help message; same as action "shorthelp".'
-complete -c todo.sh -f -a -p -n "not __fish_seen_subcommand_from -p" -d 'Plain mode turns off colors.'
-complete -c todo.sh -f -a -P -n "not __fish_seen_subcommand_from -P" -d 'Hide priority labels in list output. Use twice to show priority labels (default).'
-complete -c todo.sh -f -a -a -n "not __fish_seen_subcommand_from -a" -d 'Do not auto-archive tasks automatically on completion.'
-complete -c todo.sh -f -a -A -n "not __fish_seen_subcommand_from -A" -d 'Auto-archive tasks automatically on completion.'
-complete -c todo.sh -f -a -n -n "not __fish_seen_subcommand_from -n" -d 'Do not preserve line numbers; automatically remove blank lines on task deletion.'
-complete -c todo.sh -f -a -N -n "not __fish_seen_subcommand_from -N" -d 'Preserve line numbers.'
-complete -c todo.sh -f -a -t -n "not __fish_seen_subcommand_from -t" -d 'Prepend the current date to a task automatically when it is added.'
-complete -c todo.sh -f -a -T -n "not __fish_seen_subcommand_from -T" -d 'Do not prepend the current date to a task automatically when it is added.'
-complete -c todo.sh -f -a -v -n "not __fish_seen_subcommand_from -v" -d 'Verbose mode turns on confirmation messages.'
-complete -c todo.sh -f -a -vv -n "not __fish_seen_subcommand_from -vv" -d 'Extra verbose mode prints some debugging information and additional help text.'
-complete -c todo.sh -f -a -V -n "not __fish_seen_subcommand_from -V" -d 'Displays version, license and credits.'
-complete -c todo.sh -f -a -x -n "not __fish_seen_subcommand_from -x" -d 'Disables TODOTXT_FINAL_FILTER.'
+# Basic Options
+complete -c todo.sh -f -a -@ -n "not __fish_seen_subcommand_from $todo_commands; and not __fish_seen_subcommand_from -@" -d 'Hide context names in list output. Use twice to show context names (default).'
+complete -c todo.sh -f -a -+ -n "not __fish_seen_subcommand_from $todo_commands; and not __fish_seen_subcommand_from -+" -d 'Hide project names in list output. Use twice to show project names (default).'
+complete -c todo.sh -f -a -c -n "not __fish_seen_subcommand_from $todo_commands; and not __fish_seen_subcommand_from -c" -d 'Color mode.'
+complete -c todo.sh -f -a -d -n "not __fish_seen_subcommand_from $todo_commands; and not __fish_seen_subcommand_from -d" -d 'Use a configuration file other than one of the defaults (e.g. ~/.config/todo/config).'
+complete -c todo.sh -f -a -f -n "not __fish_seen_subcommand_from $todo_commands; and not __fish_seen_subcommand_from -f" -d 'Forces actions without confirmation or interactive input.'
+complete -c todo.sh -f -a -h -n "not __fish_seen_subcommand_from $todo_commands; and not __fish_seen_subcommand_from -h" -d 'Display a short help message; same as action "shorthelp".'
+complete -c todo.sh -f -a -p -n "not __fish_seen_subcommand_from $todo_commands; and not __fish_seen_subcommand_from -p" -d 'Plain mode turns off colors.'
+complete -c todo.sh -f -a -P -n "not __fish_seen_subcommand_from $todo_commands; and not __fish_seen_subcommand_from -P" -d 'Hide priority labels in list output. Use twice to show priority labels (default).'
+complete -c todo.sh -f -a -a -n "not __fish_seen_subcommand_from $todo_commands; and not __fish_seen_subcommand_from -a" -d 'Do not auto-archive tasks automatically on completion.'
+complete -c todo.sh -f -a -A -n "not __fish_seen_subcommand_from $todo_commands; and not __fish_seen_subcommand_from -A" -d 'Auto-archive tasks automatically on completion.'
+complete -c todo.sh -f -a -n -n "not __fish_seen_subcommand_from $todo_commands; and not __fish_seen_subcommand_from -n" -d 'Do not preserve line numbers; automatically remove blank lines on task deletion.'
+complete -c todo.sh -f -a -N -n "not __fish_seen_subcommand_from $todo_commands; and not __fish_seen_subcommand_from -N" -d 'Preserve line numbers.'
+complete -c todo.sh -f -a -t -n "not __fish_seen_subcommand_from $todo_commands; and not __fish_seen_subcommand_from -t" -d 'Prepend the current date to a task automatically when it is added.'
+complete -c todo.sh -f -a -T -n "not __fish_seen_subcommand_from $todo_commands; and not __fish_seen_subcommand_from -T" -d 'Do not prepend the current date to a task automatically when it is added.'
+complete -c todo.sh -f -a -v -n "not __fish_seen_subcommand_from $todo_commands; and not __fish_seen_subcommand_from -v" -d 'Verbose mode turns on confirmation messages.'
+complete -c todo.sh -f -a -vv -n "not __fish_seen_subcommand_from $todo_commands; and not __fish_seen_subcommand_from -vv" -d 'Extra verbose mode prints some debugging information and additional help text.'
+complete -c todo.sh -f -a -V -n "not __fish_seen_subcommand_from $todo_commands; and not __fish_seen_subcommand_from -V" -d 'Displays version, license and credits.'
+complete -c todo.sh -f -a -x -n "not __fish_seen_subcommand_from $todo_commands; and not __fish_seen_subcommand_from -x" -d 'Disables TODOTXT_FINAL_FILTER.'
+
