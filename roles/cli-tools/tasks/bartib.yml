@@ -25,3 +25,15 @@
     state: link
     force: yes
 
+- name: Check if the conf.d directory exists
+  ansible.builtin.file:
+    path: "{{ xdg_config_dir }}/fish/conf.d"
+    state: directory
+
+- name: Link the bartib fish file
+  ansible.builtin.file:
+    src: "{{ wac_dir }}/roles/cli-tools/bartib/bartib.fish"  
+    dest: "{{ xdg_config_dir }}/fish/conf.d/bartib.fish"
+    state: link
+    force: yes
+    
