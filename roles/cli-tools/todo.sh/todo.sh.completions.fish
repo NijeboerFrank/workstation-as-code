@@ -1,12 +1,12 @@
 
-set -l todo_commands ls list lsa listall lsc lsproj add addm addto append archive deduplicate del do rm pri depri help shorthelp report replace prepend
+set -l todo_commands ls list lsa listall lsc lsprj add addm addto append archive deduplicate del do rm pri depri help shorthelp report replace prepend
 # commands
 complete -c todo.sh -f -n "not __fish_seen_subcommand_from $todo_commands" -a ls -d 'List Tasks containing TERM(s) (or not -TERM(s)).'
 complete -c todo.sh -f -n "not __fish_seen_subcommand_from $todo_commands" -a list -d 'List Tasks containing TERM(s) (or not -TERM(s)).'
 complete -c todo.sh -f -n "not __fish_seen_subcommand_from $todo_commands" -a lsa -d 'List all Tasks from todo.txt and done.txt containing TERM (or not -TERM).'
 complete -c todo.sh -f -n "not __fish_seen_subcommand_from $todo_commands" -a listall -d 'List all Tasks from todo.txt and done.txt containing TERM (or not -TERM).'
 complete -c todo.sh -f -n "not __fish_seen_subcommand_from $todo_commands" -a lsc -d 'List contexts (start with an @ sign in todo.txt).'
-complete -c todo.sh -f -n "not __fish_seen_subcommand_from $todo_commands" -a lsproj -d 'List projects (start with a + sign in todo.txt).'
+complete -c todo.sh -f -n "not __fish_seen_subcommand_from $todo_commands" -a lsprj -d 'List projects (start with a + sign in todo.txt).'
 complete -c todo.sh -f -n "not __fish_seen_subcommand_from $todo_commands" -a add -d 'Adds a Task to your todo.txt file.'
 complete -c todo.sh -f -n "not __fish_seen_subcommand_from $todo_commands" -a addm -d 'Adds one Task per input line to your todo.txt file.'
 complete -c todo.sh -f -n "not __fish_seen_subcommand_from $todo_commands" -a addto -d 'Adds a a line of text to any file located in the todo.txt directory.'
