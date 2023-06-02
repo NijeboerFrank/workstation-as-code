@@ -1,3 +1,4 @@
+#!/bin/fish
 # List the help page
 set __todo_txt_help_output (todo.sh help)
 
@@ -7,9 +8,9 @@ set -l commands_descriptions (string match -r '^\s{4}(\w+[[:ascii:]]+).*$' -g $_
 set -l additional_commands command help
 complete -c todo.sh -f
 
-for command in $todo_commands;
-    complete -c todo.sh -n "not __fish_seen_subcommand_from $todo_commands; or __fish_seen_subcommand_from $additional_commands" -r -a "$command" -d (string match -r (echo "^\s{4}($command(?> [[:ascii:]]+)?)\$") -g $__todo_txt_help_output);
-end 
+for command in $todo_commands
+    complete -c todo.sh -n "not __fish_seen_subcommand_from $todo_commands; or __fish_seen_subcommand_from $additional_commands" -r -a "$command" -d (string match -r (echo "^\s{4}($command(?> [[:ascii:]]+)?)\$") -g $__todo_txt_help_output)
+end
 
 # Options
 function __fish_todo_txt_match_option_description
@@ -21,13 +22,13 @@ function __fish_todo_txt_match_option_description
     set -f split (string split '|' -- $matched_string)
     set -f trim (string trim -- $split)
     set -f join (string join " " -- $trim)
-    set -f replace (string replace -r -- "-$argv" "" $join) 
+    set -f replace (string replace -r -- "-$argv" "" $join)
     printf "%s" $replace
 end
 
 set -l todo_txt_options (string match -r '\s{4}-(\w+)' -g $__todo_txt_help_output)
-for option in $todo_txt_options;
-    complete -c todo.sh -n "not __fish_seen_subcommand_from $todo_commands" -o "$option" -d (__fish_todo_txt_match_option_description $option);
+for option in $todo_txt_options
+    complete -c todo.sh -n "not __fish_seen_subcommand_from $todo_commands" -o "$option" -d (__fish_todo_txt_match_option_description $option)
 end
 
 # Matching functions
