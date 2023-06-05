@@ -79,7 +79,7 @@ complete -c todo.sh -f -n "not __fish_seen_subcommand_from $commands_with_filena
 complete -c todo.sh -F -n "__fish_seen_subcommand_from move mv; and __fish_seen_item"
 
 # Completing items
-set -l commands_with_item app append del depri do done dp o p prep prepend pri replace rm
+set -l commands_with_item app append del depri do done dp o p prep prepend pri replace rm again
 complete -c todo.sh -f -n "__fish_seen_subcommand_from $commands_with_item" -a '(__fish_get_items)'
 complete -c todo.sh -f -n "__fish_seen_subcommand_from move mv; and not __fish_seen_item" -a '(__fish_get_items)'
 
