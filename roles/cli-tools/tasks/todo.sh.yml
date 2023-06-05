@@ -8,12 +8,10 @@
     path: "{{ todo_sh_location }}/todo.sh"
     mode: +x
 
-- name: Link the todo.sh fish file
-  ansible.builtin.file:
-    src: "{{ wac_dir }}/roles/cli-tools/todo.sh/todo.sh.fish"  
+- name: Template the todo.sh fish file
+  ansible.builtin.template:
+    src: "{{ wac_dir }}/roles/cli-tools/todo.sh/todo.sh.fish.j2"
     dest: "{{ xdg_config_dir }}/fish/conf.d/todo.sh.fish"
-    state: link
-    force: yes
 
 - name: "Check if {{ xdg_config_dir }}/todo.sh exists"
   ansible.builtin.file:
@@ -36,6 +34,3 @@
     dest: "{{ xdg_config_dir }}/fish/completions/todo.sh.fish"
     state: link
     force: yes
-
-
-    

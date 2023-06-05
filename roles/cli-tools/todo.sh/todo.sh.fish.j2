@@ -1,0 +1,28 @@
+alias t="todo.sh -t -P -a"
+alias td="date +'%Y-%m-%d'"
+
+function __fish_edit_todo_txt
+	$EDITOR $argv {{ todo_sh_dir }}/todo.txt
+end
+
+function __fish_edit_done_txt
+	$EDITOR $argv {{ todo_sh_dir }}/done.txt
+end
+
+function te
+    argparse --ignore-unknown 'a/archive' 'r/report' 'b/backup' -- $argv
+	set -f file_to_edit {{ todo_sh_dir }}/todo.txt
+	if test $_flag_a
+		set -a -f file_to_edit {{ todo_sh_dir }}/done.txt
+	end
+	if test $_flag_r
+		set -a -f file_to_edit {{ todo_sh_dir }}/report.txt
+	end
+	if test $_flag_b
+		set -a -f file_to_edit {{ todo_sh_dir }}/backup.txt
+	end
+
+	$EDITOR $argv $file_to_edit
+end
+
+export TODOTXT_CFG_FILE=$HOME/.config/todo.sh/config
