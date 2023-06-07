@@ -4,12 +4,15 @@ set __todo_txt_help_output (todo.sh help)
 
 # Commands
 set -l todo_commands (string match -r '^\s{4}([[:lower:]]+).*$' -g $__todo_txt_help_output)
+set -l todo_commands (printf '%s\n' $todo_commands | sort -u)
 set -l commands_descriptions (string match -r '^\s{4}(\w+[[:ascii:]]+).*$' -g $__todo_txt_help_output)
 set -l additional_commands command help
 complete -c todo.sh -f
 
 for command in $todo_commands
-    complete -c todo.sh -n "not __fish_seen_subcommand_from $todo_commands; or __fish_seen_subcommand_from $additional_commands" -r -a "$command" -d (string match -r (echo "^\s{4}($command(?> [[:ascii:]]+)?)\$") -g $__todo_txt_help_output)
+    set -l regex (printf "^\s{4}(%s(?> [[:ascii:]]+)?)\$" $command)
+    set -l description (string match -r $regex -g $__todo_txt_help_output)[1]
+    complete -c todo.sh -n "not __fish_seen_subcommand_from $todo_commands; or __fish_seen_subcommand_from $additional_commands" -r -a "$command" -d $description
 end
 
 # Options
@@ -76,7 +79,7 @@ complete -c todo.sh -f -n "not __fish_seen_subcommand_from $commands_with_filena
 complete -c todo.sh -F -n "__fish_seen_subcommand_from move mv; and __fish_seen_item"
 
 # Completing items
-set -l commands_with_item app append del depri do done dp o p prep prepend pri replace rm
+set -l commands_with_item app append del depri do done dp o p prep prepend pri replace rm again
 complete -c todo.sh -f -n "__fish_seen_subcommand_from $commands_with_item" -a '(__fish_get_items)'
 complete -c todo.sh -f -n "__fish_seen_subcommand_from move mv; and not __fish_seen_item" -a '(__fish_get_items)'
 
