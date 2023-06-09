@@ -23,6 +23,11 @@
   tags:
     - gitui
 
+- name: Install and configure amber
+  import_tasks: "amber.yml"
+  tags:
+    - amber
+
 - name: Install and configure zoxide
   import_tasks: "zoxide.yml"
   tags: 
