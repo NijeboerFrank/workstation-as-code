@@ -53,3 +53,8 @@
   import_tasks: "todo.sh.yml"
   tags:
     - todo.sh
+
+- name: Install and configure broot
+  import_tasks: "broot.yml"
+  tags:
+    - broot
