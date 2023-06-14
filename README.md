@@ -94,7 +94,8 @@ Tasks I plan to accomplish in this repository:
 - [ ] Add the Gnome configuration as a role
 - [ ] Add applications that I use as roles
 - [ ] Document/research clean setup?
-  - [ ] Do we need initial git setup?
+  - [ ] Initial git setup
+  - [ ] Nvidia setup, if enabled. Don't forget the kernel parameters
 - [ ] Document/research setup for variables overriding
   - `group_vars/local.yml` overrides `group_vars/all.yml`
   - [Ansible Docs](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_variables.html)
