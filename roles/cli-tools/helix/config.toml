@@ -1,7 +1,7 @@
 theme = "onelight"
 
 [editor]
-mouse = false
+mouse = true
 # scrolloff = 999
 bufferline = "always"
 rulers = [80]
@@ -17,11 +17,6 @@ display-inlay-hints = true
 insert = "block"
 normal = "block"
 select = "block"
-
-[keys.normal.space.e]
-e = [":write-all" ,":sh just format"]
-a = ":reload-all"
-r = ":reflow"
 
 [keys.normal.space.i]
 b = ":insert-output printf \"\\x60\\x60\\x60\n\n\\x60\\x60\\x60\""
