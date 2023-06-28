@@ -1,5 +1,6 @@
+---
 - name: Update dnf packages
-  become: yes
+  become: true
   command: dnf update -y
   register: dnf_update
   changed_when: "'Nothing to do.' not in dnf_update.stdout"

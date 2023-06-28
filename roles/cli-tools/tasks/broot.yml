@@ -1,3 +1,4 @@
+---
 - name: Check rust
   include_tasks: "{{ languages_dir }}/rust.yml"
 
@@ -7,12 +8,12 @@
     state: present
   register: broot_get
 
-- name: "Check if {{ xdg_config_dir }}/broot exists"
+- name: Check if {{ xdg_config_dir }}/broot exists
   ansible.builtin.file:
     path: "{{ xdg_config_dir }}/broot"
     state: directory
 
-- name: "Check if {{ xdg_config_dir }}/fish/functionsexists"
+- name: Check if {{ xdg_config_dir }}/fish/functionsexists
   ansible.builtin.file:
     path: "{{ xdg_config_dir }}/fish/functions"
     state: directory
@@ -36,9 +37,9 @@
     - dark-blue-skin
 
 - name: Write the broot shell function
-  ansible.builtin.shell: "broot --print-shell-function fish > {{ xdg_config_dir }}/fish/functions/br.fish"
+  ansible.builtin.shell: broot --print-shell-function fish > {{ xdg_config_dir }}/fish/functions/br.fish
   when: broot_get.changed
 
 - name: Set broot to installed state
-  ansible.builtin.shell: "broot --set-install-state installed"
+  ansible.builtin.shell: broot --set-install-state installed
   when: broot_get.changed

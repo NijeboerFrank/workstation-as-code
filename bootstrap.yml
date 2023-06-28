@@ -6,3 +6,4 @@
     - { role: cli-tools, tags: ['cli-tools'] }
     - { role: languages, tags: ['languages'] }
     - { role: gnome, tags: ['gnome'] }
+    - { role: apps, tags: ['apps'] }

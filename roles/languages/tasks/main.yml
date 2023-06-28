@@ -1,3 +1,4 @@
+---
 - name: Install and configure docker
   import_tasks: docker.yml
   tags:
@@ -28,3 +29,7 @@
   tags:
     - markdown
 
+- name: Install and configure ansible
+  import_tasks: ansible.yml
+  tags:
+    - ansible

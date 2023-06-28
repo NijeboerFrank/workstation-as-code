@@ -1,3 +1,4 @@
+---
 - name: Check rust
   include_tasks: "{{ languages_dir }}/rust.yml"
 
@@ -5,7 +6,7 @@
   ansible.builtin.git:
     repo: "{{ bartib_remote_repo }}"
     dest: "{{ bartib_source_dir }}"
-    single_branch: yes
+    single_branch: true
     version: master
 
 - name: Check whether the fish completions directory exists
@@ -23,7 +24,7 @@
     src: "{{ bartib_source_dir }}/misc/bartib.fish"
     dest: "{{ xdg_config_dir }}/fish/completions/bartib.fish"
     state: link
-    force: yes
+    force: true
 
 - name: Check if the conf.d directory exists
   ansible.builtin.file:
@@ -32,8 +33,7 @@
 
 - name: Link the bartib fish file
   ansible.builtin.file:
-    src: "{{ wac_dir }}/roles/cli-tools/bartib/bartib.fish"  
+    src: "{{ wac_dir }}/roles/cli-tools/bartib/bartib.fish"
     dest: "{{ xdg_config_dir }}/fish/conf.d/bartib.fish"
     state: link
-    force: yes
-    
+    force: true

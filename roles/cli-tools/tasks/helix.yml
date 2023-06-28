@@ -1,26 +1,27 @@
+---
 - name: Configure custom copr for helix
-  become: yes
+  become: true
   community.general.copr:
-    name: "varlad/helix"
+    name: varlad/helix
     state: enabled
 
 - name: Install helix
-  become: yes
+  become: true
   ansible.builtin.dnf:
     name:
       - helix
     state: latest
 
-- name: "Test whether {{ xdg_config_dir }}/helix dir exists"
+- name: Test whether {{ xdg_config_dir }}/helix dir exists
   stat:
     path: "{{ xdg_config_dir }}/helix"
-  register: "existing_dir"
+  register: existing_dir
 
-- name: "Remove {{ xdg_config_dir }}/helix directory"
+- name: Remove {{ xdg_config_dir }}/helix directory
   ansible.builtin.file:
     path: "{{ xdg_config_dir }}/helix"
     state: absent
-  when: "existing_dir.stat is defined and existing_dir.stat.islnk is false"
+  when: existing_dir.stat is defined and existing_dir.stat.islnk is false
 
 - name: Link the helix configuration files
   ansible.builtin.file:
@@ -29,9 +30,8 @@
     state: link
     force: true
 
-- name: Install the wl-clipboard package from dnf 
-  become: yes
+- name: Install the wl-clipboard package from dnf
+  become: true
   ansible.builtin.dnf:
     name: wl-clipboard
     state: latest
-  

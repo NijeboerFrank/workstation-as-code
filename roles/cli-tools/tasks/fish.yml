@@ -1,10 +1,11 @@
+---
 - name: Install fish
-  become: yes
+  become: true
   ansible.builtin.dnf:
     name: fish
     state: latest
 
-- name: "Test whether {{ xdg_config_dir }}/fish dir exists"
+- name: Test whether {{ xdg_config_dir }}/fish dir exists
   ansible.builtin.file:
     path: "{{ xdg_config_dir }}/fish"
     state: directory
@@ -32,17 +33,16 @@
   ansible.builtin.get_url:
     url: https://raw.githubusercontent.com/franciscolourenco/done/master/conf.d/done.fish
     dest: "{{ xdg_config_dir }}/fish/conf.d/done.fish"
-  
+
 - name: Install the starship prompt
   block:
     - name: Enable starship copr
-      become: yes
+      become: true
       community.general.copr:
         name: atim/starship
         state: enabled
     - name: Install starship
-      become: yes
+      become: true
       ansible.builtin.dnf:
         name: starship
         state: latest
-  

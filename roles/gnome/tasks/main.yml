@@ -1,20 +1,19 @@
 ---
 # tasks file for gnome
 - name: Install Gnome Applications
-  include_tasks: "gnome_apps.yml"
+  include_tasks: gnome_apps.yml
   tags:
     - gnome-apps
 
 - name: Install fonts
-  include_tasks: "fonts.yml"
+  include_tasks: fonts.yml
   loop: "{{ fonts }}"
   loop_control:
-    loop_var: "font"
+    loop_var: font
   tags:
     - gnome-font
 
 - name: Setup Gsettings
-  include_tasks: "gsettings.yml"
+  include_tasks: gsettings.yml
   tags:
     - gsettings
-

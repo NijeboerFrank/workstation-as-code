@@ -1,19 +1,20 @@
+---
 - name: Install gitui
-  become: yes
+  become: true
   ansible.builtin.dnf:
     name: gitui
     state: latest
 
-- name: "Test whether {{ xdg_config_dir }}/gitui dir exists"
+- name: Test whether {{ xdg_config_dir }}/gitui dir exists
   stat:
     path: "{{ xdg_config_dir }}/gitui"
-  register: "existing_dir"
+  register: existing_dir
 
-- name: "Remove {{ xdg_config_dir }}/gitui directory"
+- name: Remove {{ xdg_config_dir }}/gitui directory
   ansible.builtin.file:
     path: "{{ xdg_config_dir }}/gitui"
     state: absent
-  when: "existing_dir.stat is defined and existing_dir.stat.islnk is false"
+  when: existing_dir.stat is defined and existing_dir.stat.islnk is false
 
 - name: Link the gitui configuration files
   ansible.builtin.file:

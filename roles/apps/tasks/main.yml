@@ -1,4 +1,5 @@
+---
 - name: Install and configure codium
-  import_tasks: "codium.yml"
+  import_tasks: codium.yml
   tags:
     - codium

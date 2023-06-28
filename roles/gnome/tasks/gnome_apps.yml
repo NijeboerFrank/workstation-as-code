@@ -1,3 +1,4 @@
+---
 - name: Add the flathub flatpak repository remote to the user installation
   community.general.flatpak_remote:
     name: flathub
@@ -13,7 +14,7 @@
       - org.gnome.World.Secrets
       - org.nickvision.money
       - com.calibre_ebook.calibre
-      - org.zotero.Zotero 
+      - org.zotero.Zotero
       - com.logseq.Logseq
       - com.mattjakeman.ExtensionManager
       - ca.desrt.dconf-editor
@@ -23,7 +24,7 @@
     method: user
 
 - name: Installing Nextcloud
-  become: yes
+  become: true
   dnf:
     name:
       - nextcloud-client
@@ -31,7 +32,7 @@
       - nextcloud-client-nautilus
 
 - name: Remove unnecessary programs
-  become: yes
+  become: true
   dnf:
     name:
       - gnome-terminal
@@ -44,6 +45,5 @@
     key: "{{ item.key }}"
     value: "{{ item.value }}"
   loop:
-    - { key: "/org/gnome/Console/shell", value: "['/bin/fish']"}
-    - { key: "/org/gnome/Console/theme", value: "'auto'"}
-
+    - { key: /org/gnome/Console/shell, value: "['/bin/fish']" }
+    - { key: /org/gnome/Console/theme, value: "'auto'" }

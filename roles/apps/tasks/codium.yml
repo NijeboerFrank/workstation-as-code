@@ -1,3 +1,4 @@
+---
 # 
 - name: Enable the VSCodium Repository
   become: true
@@ -14,11 +15,11 @@
 - name: Install VSCodium
   become: true
   ansible.builtin.dnf:
-    name: 
+    name:
       - codium
     state: present
 
-- name: "Make sure that {{ xdg_config_dir }}/VSCodium/User directory exists"
+- name: Make sure that {{ xdg_config_dir }}/VSCodium/User directory exists
   file:
     path: "{{ xdg_config_dir }}/VSCodium/User"
     state: directory
@@ -27,6 +28,6 @@
   ansible.builtin.template:
     src: "{{ wac_dir }}/roles/apps/codium/{{ item }}.json.j2"
     dest: "{{ xdg_config_dir }}/VSCodium/User/{{ item }}.json"
-  loop: 
-    - "settings"
-    - "keybindings"
+  loop:
+    - settings
+    - keybindings

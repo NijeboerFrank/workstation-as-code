@@ -1,3 +1,4 @@
+---
 - name: Check rust
   include_tasks: "{{ languages_dir }}/rust.yml"
 

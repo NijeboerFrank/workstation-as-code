@@ -1,5 +1,6 @@
+---
 - name: Install zoxide
-  become: yes
+  become: true
   ansible.builtin.dnf:
     name: zoxide
 
@@ -10,8 +11,7 @@
 
 - name: Link the zoxide fish file
   ansible.builtin.file:
-    src: "{{ wac_dir }}/roles/cli-tools/zoxide/zoxide.fish"  
+    src: "{{ wac_dir }}/roles/cli-tools/zoxide/zoxide.fish"
     dest: "{{ xdg_config_dir }}/fish/conf.d/zoxide.fish"
     state: link
-    force: yes
-    
+    force: true

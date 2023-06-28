@@ -1,23 +1,25 @@
+---
 - name: Install python
-  become: yes
+  become: true
   ansible.builtin.dnf:
     name: python
-    state: latest
+    state: present
 
 - name: Install pip
-  become: yes
+  become: true
   ansible.builtin.dnf:
     name: python3-pip
-    state: latest
+    state: present
 
 - name: Install pyright
-  pip:
+  ansible.builtin.pip:
     name: pyright
   tags:
     - lsp
-
+    - never
 - name: Install python-lsp-server
-  pip:
+  ansible.builtin.pip:
     name: python-lsp-server
   tags:
     - lsp
+    - never

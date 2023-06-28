@@ -1,3 +1,4 @@
+---
 # LF config
 ## Version of lf to install
 lf_version: r29
@@ -11,7 +12,7 @@ bartib_source_dir: "{{ software_dir }}/bartib"
 
 # I have my own fork of bartib, but you could use the original
 # bartib_remote_repo: "https://github.com/nikolassv/bartib"
-bartib_remote_repo: "git@github.com:NijeboerFrank/bartib.git"
+bartib_remote_repo: git@github.com:NijeboerFrank/bartib.git
 
 # Todo.sh config
 ## Location where the todo.sh script will be installed

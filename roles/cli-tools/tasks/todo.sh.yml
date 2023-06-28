@@ -1,3 +1,4 @@
+---
 - name: Get todo.sh
   ansible.builtin.get_url:
     url: https://raw.githubusercontent.com/todotxt/todo.txt-cli/master/todo.sh
@@ -13,7 +14,7 @@
     src: "{{ wac_dir }}/roles/cli-tools/todo.sh/todo.sh.fish.j2"
     dest: "{{ xdg_config_dir }}/fish/conf.d/todo.sh.fish"
 
-- name: "Check if {{ xdg_config_dir }}/todo.sh exists"
+- name: Check if {{ xdg_config_dir }}/todo.sh exists
   ansible.builtin.file:
     path: "{{ xdg_config_dir }}/todo.sh"
     state: directory
@@ -30,7 +31,7 @@
 
 - name: Link the fish completions
   ansible.builtin.file:
-    src: "{{ wac_dir }}/roles/cli-tools/todo.sh/todo.sh.completions.fish"  
+    src: "{{ wac_dir }}/roles/cli-tools/todo.sh/todo.sh.completions.fish"
     dest: "{{ xdg_config_dir }}/fish/completions/todo.sh.fish"
     state: link
-    force: yes
+    force: true

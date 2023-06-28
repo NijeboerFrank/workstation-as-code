@@ -2,23 +2,23 @@
 # tasks file for php
 # Need to add the Remi repository for php on Fedora
 - name: Import gpg key Docker repo
-  become: yes
+  become: true
   ansible.builtin.rpm_key:
     state: present
     key: https://download.docker.com/linux/fedora/gpg
-    fingerprint: 060A 61C5 1B55 8A7F 742B 77AA C52F EB6B 621E 9F35
+    fingerprint: "060A 61C5 1B55 8A7F 742B 77AA C52F EB6B 621E 9F35"
 
 - name: Install Docker repo
-  become: yes
-  yum_repository:
+  become: true
+  ansible.builtin.yum_repository:
     name: Docker
     description: The Docker repository
     baseurl: https://download.docker.com/linux/fedora/$releasever/$basearch/stable
     gpgkey: https://download.docker.com/linux/fedora/gpg
-    gpgcheck: yes
+    gpgcheck: true
 - name: Make sure that old docker stuff is not there
-  become: yes
-  dnf:
+  become: true
+  ansible.builtin.dnf:
     name:
       - docker
       - docker-common
@@ -26,13 +26,13 @@
     state: absent
 
 - name: Install Docker
-  become: yes
-  dnf:
-    name: 
-      - docker-ce 
-      - docker-ce-cli 
-      - containerd.io 
-      - docker-buildx-plugin 
+  become: true
+  ansible.builtin.dnf:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-buildx-plugin
       - docker-compose-plugin
     state: present
 
@@ -45,23 +45,24 @@
   ansible.builtin.user:
     name: frank
     groups: docker
-    append: yes
+    append: true
 
 - name: Enable and start systemctl
-  become: yes
+  become: true
   ansible.builtin.systemd:
     name: docker
     state: started
-    enabled: yes
+    enabled: true
 
 - name: Install dockerfile lang server
+  tags:
+    - lsp
+    - never
   block:
-
     - name: Check npm
-      include_tasks: "{{ languages_dir }}/node.yml"
+      ansible.builtin.include_tasks:
+        file: "{{ languages_dir }}/node.yml"
     - name: Install dockerfile lang server
       community.general.npm:
         name: dockerfile-language-server-nodejs
         global: true
-  tags:
-    - lsp

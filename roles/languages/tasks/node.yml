@@ -1,21 +1,21 @@
+---
 - name: Install node.js
-  become: yes
+  become: true
   ansible.builtin.dnf:
     name: nodejs
     state: latest
 
 - name: Install npm
-  become: yes
+  become: true
   ansible.builtin.dnf:
     name: npm
     state: latest
-  
+
 - name: Setup npm
   block:
     - name: Check npm global directory
       stat:
         path: "{{ software_dir }}/npm-global"
       register: npm_test
-    - ansible.builtin.shell: "mkdir -p {{ software_dir }}/npm-global && npm config set prefix '{{ software_dir }}/npm-global'"
-      when: npm_test.stat is not defined or npm_test.stat.isdir is not defined      
-
+    - ansible.builtin.shell: mkdir -p {{ software_dir }}/npm-global && npm config set prefix '{{ software_dir }}/npm-global'
+      when: npm_test.stat is not defined or npm_test.stat.isdir is not defined

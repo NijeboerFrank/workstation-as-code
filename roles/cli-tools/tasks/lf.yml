@@ -1,3 +1,4 @@
+---
 - name: Check lf version
   command: lf --version
   register: lf_output
@@ -6,18 +7,18 @@
 
 - name: Install lf
   block:
-  - name: Get the lf tar file (Version {{ lf_version }})
-    ansible.builtin.get_url:
-      url: "https://github.com/gokcehan/lf/releases/download/{{ lf_version }}/lf-linux-amd64.tar.gz"
-      dest: /tmp/lf.tar.gz
-  - name: Unarchive the lf tar file
-    ansible.builtin.unarchive:
-      src: /tmp/lf.tar.gz
-      dest: "{{ lf_location }}"
-  - name: Give the file executable permissions
-    ansible.builtin.file:
-      path: "{{ lf_location }}/lf"
-      mode: +x
+    - name: Get the lf tar file (Version {{ lf_version }})
+      ansible.builtin.get_url:
+        url: https://github.com/gokcehan/lf/releases/download/{{ lf_version }}/lf-linux-amd64.tar.gz
+        dest: /tmp/lf.tar.gz
+    - name: Unarchive the lf tar file
+      ansible.builtin.unarchive:
+        src: /tmp/lf.tar.gz
+        dest: "{{ lf_location }}"
+    - name: Give the file executable permissions
+      ansible.builtin.file:
+        path: "{{ lf_location }}/lf"
+        mode: +x
   when: lf_output is failed or lf_output.stdout != lf_version
 
 - name: Check if the lf config directory exists
@@ -30,4 +31,3 @@
     src: "{{ wac_dir }}/roles/cli-tools/lf/lfrc"
     dest: "{{ xdg_config_dir }}/lf/lfrc"
     state: link
-  
