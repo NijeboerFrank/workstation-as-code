@@ -1,8 +1,0 @@
----
-- name: Make sure that Python and pip are available
-  include_tasks: "{{ languages_dir }}/python.yml"
-
-- name: Install ansible lint
-  ansible.builtin.pip:
-    name:
-      - ansible-lint

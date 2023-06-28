@@ -1,0 +1,10 @@
+- name: Enable starship copr
+  become: true
+  community.general.copr:
+    name: atim/starship
+    state: enabled
+- name: Install starship
+  become: true
+  ansible.builtin.dnf:
+    name: starship
+    state: present

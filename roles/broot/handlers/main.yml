@@ -1,0 +1,16 @@
+---
+- name: Write the broot shell function
+  ansible.builtin.command: broot --print-shell-function fish
+  register: broot_shell
+  changed_when: false
+
+- name: Write to fish function
+  ansible.builtin.copy:
+    content: "{{ broot_shell.stdout }}"
+    dest: "{{ xdg_config_dir }}/fish/functions/br.fish"
+    mode: "0644"
+
+- name: Set broot to installed state
+  ansible.builtin.command: broot --set-install-state installed
+  register: broot_install_state
+  changed_when: broot_install_state.stdout == ""

@@ -1,0 +1,9 @@
+## The software_dir
+software_dir: ~/Software
+
+## Where the bartib sources will be stored
+bartib_source_dir: "{{ software_dir }}/bartib"
+
+# I have my own fork of bartib, but you could use the original
+# bartib_remote_repo: "https://github.com/nikolassv/bartib"
+bartib_remote_repo: git@github.com:NijeboerFrank/bartib.git

@@ -1,11 +1,11 @@
 ---
 - name: Update dnf packages
   become: true
-  command: dnf update -y
+  ansible.builtin.command: dnf update -y
   register: dnf_update
   changed_when: "'Nothing to do.' not in dnf_update.stdout"
 
 - name: Update flatpak packages
-  command: flatpak update -y
+  ansible.builtin.command: flatpak update -y
   register: flatpak_update
   changed_when: "'Nothing to do.' not in flatpak_update.stdout"

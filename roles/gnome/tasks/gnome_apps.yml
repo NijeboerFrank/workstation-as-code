@@ -25,7 +25,7 @@
 
 - name: Installing Nextcloud
   become: true
-  dnf:
+  ansible.builtin.dnf:
     name:
       - nextcloud-client
       - nextcloud-client-libs
@@ -33,7 +33,7 @@
 
 - name: Remove unnecessary programs
   become: true
-  dnf:
+  ansible.builtin.dnf:
     name:
       - gnome-terminal
       - gnome-terminal-nautilus
@@ -41,7 +41,7 @@
 
 # Gnome Console
 - name: Configure Gnome Console
-  dconf:
+  community.general.dconf:
     key: "{{ item.key }}"
     value: "{{ item.value }}"
   loop:

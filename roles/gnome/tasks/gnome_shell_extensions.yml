@@ -3,3 +3,4 @@
   ansible.builtin.file:
     path: /home/frank/.local/share/gnome-shell/extensions/
     state: directory
+    mode: "0755"

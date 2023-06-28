@@ -1,48 +1,48 @@
 ---
 # Workspaces
 - name: Disable dynamic workspaces
-  dconf:
+  community.general.dconf:
     key: /org/gnome/mutter/dynamic-workspaces
     value: false
 
-- name: Set number of workspaces to {{ workspaces|length }}
-  dconf:
+- name: Set number of workspaces to {{ workspaces | length }}
+  community.general.dconf:
     key: /org/gnome/desktop/wm/preferences/num-workspaces
-    value: "{{ workspaces|length }}"
+    value: "{{ workspaces | length }}"
 
 - name: Disable old keybindings
-  dconf:
+  community.general.dconf:
     key: /org/gnome/shell/keybindings/switch-to-application-{{ item }}
     value: "['']"
   loop: "{{ workspaces }}"
 
 - name: Set now Workspace keybindings
-  dconf:
+  community.general.dconf:
     key: /org/gnome/desktop/wm/keybindings/switch-to-workspace-{{ item }}
     value: "['<Super>{{ item }}']"
   loop: "{{ workspaces }}"
 
 - name: Set now Workspace keybindings for moving windows
-  dconf:
+  community.general.dconf:
     key: /org/gnome/desktop/wm/keybindings/move-to-workspace-{{ item }}
     value: "['<Super><Shift>{{ item }}']"
   loop: "{{ workspaces }}"
 
 - name: Set center windows
-  dconf:
+  community.general.dconf:
     key: /org/gnome/mutter/center-new-windows
     value: true
 
 - name: Set Workspaces on all screens
-  dconf:
+  community.general.dconf:
     key: /org/gnome/mutter/workspaces-only-on-primary
     value: false
 
 # Keybindings
 - name: Set keybindings
-  dconf:
-    key: /org/gnome/desktop/wm/keybindings/{{ item.command}}
-    value: "{{ item.binding}}"
+  community.general.dconf:
+    key: "/org/gnome/desktop/wm/keybindings/{{ item.command }}"
+    value: "{{ item.binding }}"
   loop:
     - { command: switch-applications, binding: "['<Super>Tab']" }
     - { command: switch-applications-backward, binding: "['<Shift><Super>Tab']" }
@@ -56,7 +56,7 @@
     - { command: close, binding: "['<Shift><Super>q']" }
 
 - name: Set keybindings in other places
-  dconf:
+  community.general.dconf:
     key: "{{ item.command }}"
     value: "{{ item.binding }}"
   loop:
@@ -66,12 +66,12 @@
 
 # Other Settings
 - name: Set search provider settings
-  dconf:
+  community.general.dconf:
     key: /org/gnome/desktop/search-providers{{ item.key }}
     value: "{{ item.value }}"
   loop:
     - key: sort-order
-      value: "['org.gnome.Nautilus.desktop', 'org.gnome.Documents.desktop', 'org.gnome.Settings.desktop', 'org.gnome.Software.desktop', 'org.gnome.Boxes.desktop',
-        'org.gnome.Calculator.desktop', 'org.gnome.Calendar.desktop', 'org.gnome.Characters.desktop', 'firefox.desktop', 'org.gnome.clocks.desktop', 'org.gnome.Photos.desktop',
-        'org.gnome.Contacts.desktop']"
+      value: "['org.gnome.Nautilus.desktop', 'org.gnome.Documents.desktop', 'org.gnome.Settings.desktop', 'org.gnome.Software.desktop',
+        'org.gnome.Boxes.desktop', 'org.gnome.Calculator.desktop', 'org.gnome.Calendar.desktop', 'org.gnome.Characters.desktop',
+        'firefox.desktop', 'org.gnome.clocks.desktop', 'org.gnome.Photos.desktop', 'org.gnome.Contacts.desktop']"
     - { key: disabled, value: "['org.gnome.Contacts.desktop', 'org.gnome.Photos.desktop', 'org.gnome.clocks.desktop']" }

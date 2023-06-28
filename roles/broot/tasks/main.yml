@@ -1,0 +1,36 @@
+---
+- name: Get broot (this can take a while)
+  community.general.cargo:
+    name: broot
+    state: present
+  notify:
+    - "broot : Write the broot shell function"
+    - "broot : Write to fish function"
+    - "broot : Set broot to installed state"
+
+- name: Check if broot config dir exists
+  ansible.builtin.file:
+    path: "{{ xdg_config_dir }}/broot"
+    state: directory
+    mode: "0755"
+
+- name: Template the broot config file
+  ansible.builtin.template:
+    src: "conf.hjson.j2"
+    dest: "{{ xdg_config_dir }}/broot/conf.hjson"
+    mode: "0644"
+
+- name: Template the broot verbs file
+  ansible.builtin.template:
+    src: "verbs.hjson.j2"
+    dest: "{{ xdg_config_dir }}/broot/verbs.hjson"
+    mode: "0644"
+
+- name: Copy the skin files
+  ansible.builtin.template:
+    src: "{{ item }}.hjson"
+    dest: "{{ xdg_config_dir }}/broot/{{ item }}.hjson"
+    mode: "0644"
+  loop:
+    - white-skin
+    - dark-blue-skin
