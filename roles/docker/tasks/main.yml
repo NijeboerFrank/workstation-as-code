@@ -1,13 +1,4 @@
 ---
-# tasks file for php
-# Need to add the Remi repository for php on Fedora
-- name: Import gpg key Docker repo
-  become: true
-  ansible.builtin.rpm_key:
-    state: present
-    key: https://download.docker.com/linux/fedora/gpg
-    fingerprint: "060A 61C5 1B55 8A7F 742B 77AA C52F EB6B 621E 9F35"
-
 - name: Install Docker repo
   become: true
   ansible.builtin.yum_repository:
@@ -16,6 +7,9 @@
     baseurl: https://download.docker.com/linux/fedora/$releasever/$basearch/stable
     gpgkey: https://download.docker.com/linux/fedora/gpg
     gpgcheck: true
+    enabled: 1
+    repo_gpgcheck: 1
+    metadata_expire: 1h
 
 - name: Make sure that old docker stuff is not there
   become: true

@@ -1,0 +1,13 @@
+- name: Get Firefox Gnome Theme git
+  ansible.builtin.git:
+    repo: https://github.com/rafaelmardojai/firefox-gnome-theme
+    dest: "{{ software_dir }}/firefox-gnome-theme"
+    version: "v114"
+  register: firefox_theme_git
+- name: Install Firefox Gnome Theme
+  ansible.builtin.command: scripts/install.sh
+  args:
+    chdir: "{{ software_dir }}/firefox-gnome-theme"
+  when: firefox_theme_git.after != firefox_theme_git.before
+  register: firefox_gnome_installer
+  changed_when: '"Done." in firefox_gnome_installer'
