@@ -1,12 +1,13 @@
+---
 - name: Enable adw-gtk3-copr
-  become: yes
+  become: true
   community.general.copr:
-    name: "nickavem/adw-gtk3"
+    name: nickavem/adw-gtk3
     state: enabled
 
 - name: Install adw-gtk3
-  become: yes
-  dnf:
+  become: true
+  ansible.builtin.dnf:
     name: adw-gtk3
 
 - name: Install Firefox Gnome theme
@@ -17,22 +18,22 @@
         dest: "{{ software_dir }}/firefox-gnome-theme"
       register: firefox_theme_git
     - name: Install Firefox Gnome Theme
-      shell: scripts/install.sh
+      ansible.builtin.command: scripts/install.sh
       args:
         chdir: "{{ software_dir }}/firefox-gnome-theme"
       when: firefox_theme_git.after != firefox_theme_git.before
 
 # Theming
 - name: Set GTK theme and font
-  dconf:
+  community.general.dconf:
     key: "{{ item.key }}"
     value: "{{ item.value }}"
   loop:
-  - { key: "/org/gnome/desktop/interface/gtk-theme", value: "'adw-gtk3'"}
-  - { key: "/org/gnome/desktop/interface/cursor-theme", value: "'Adwaita'"}
-  - { key: "/org/gnome/desktop/interface/icon-theme", value: "'Adwaita'"}
-  - { key: "/org/gnome/desktop/interface/monospace-font-name", value: "'IosevkaTerm Nerd Font 12'"}
-  - { key: "/org/gnome/desktop/interface/font-name", value: "'Cantarell 11'"}
-  - { key: "/org/gnome/desktop/interface/document-font-name", value: "'Cantarell 11'"}
-  - { key: "/org/gnome/desktop/wm/preferences/theme", value: "'Adwaita'"}
-  - { key: "/org/gnome/desktop/wm/preferences/titlebar-font", value: "'Roboto Bold 12'"}
+    - { key: /org/gnome/desktop/interface/gtk-theme, value: "'adw-gtk3'" }
+    - { key: /org/gnome/desktop/interface/cursor-theme, value: "'Adwaita'" }
+    - { key: /org/gnome/desktop/interface/icon-theme, value: "'Adwaita'" }
+    - { key: /org/gnome/desktop/interface/monospace-font-name, value: "'IosevkaTerm Nerd Font 12'" }
+    - { key: /org/gnome/desktop/interface/font-name, value: "'Cantarell 11'" }
+    - { key: /org/gnome/desktop/interface/document-font-name, value: "'Cantarell 11'" }
+    - { key: /org/gnome/desktop/wm/preferences/theme, value: "'Adwaita'" }
+    - { key: /org/gnome/desktop/wm/preferences/titlebar-font, value: "'Roboto Bold 12'" }

@@ -1,6 +1,0 @@
-- name: Check rust
-  include_tasks: "{{ languages_dir }}/rust.yml"
-
-- name: Get amber
-  community.general.cargo:
-    name: amber

@@ -1,0 +1,52 @@
+---
+- name: Install fish
+  become: true
+  ansible.builtin.dnf:
+    name: fish
+    state: present
+
+- name: Test whether config dir exists
+  ansible.builtin.file:
+    path: "{{ xdg_config_dir }}/fish"
+    state: directory
+    mode: "0744"
+
+- name: Check if fish functions dir exists
+  ansible.builtin.file:
+    path: "{{ xdg_config_dir }}/fish/functions"
+    state: directory
+    mode: "0744"
+
+- name: Check whether the fish completions directory exists
+  ansible.builtin.file:
+    path: "{{ xdg_config_dir }}/fish/completions"
+    state: directory
+    mode: "0744"
+
+- name: Install the fish configuration file
+  ansible.builtin.template:
+    src: "config.fish"
+    dest: "{{ xdg_config_dir }}/fish/config.fish"
+    mode: "0644"
+
+- name: Install the fish variables file
+  ansible.builtin.template:
+    src: "fish_variables"
+    dest: "{{ xdg_config_dir }}/fish/fish_variables"
+    mode: "0644"
+
+- name: Check if the conf.d directory exists
+  ansible.builtin.file:
+    path: "{{ xdg_config_dir }}/fish/conf.d"
+    state: directory
+    mode: "0744"
+
+- name: Get the 'done' fish plugin
+  ansible.builtin.get_url:
+    url: https://raw.githubusercontent.com/franciscolourenco/done/master/conf.d/done.fish
+    dest: "{{ xdg_config_dir }}/fish/conf.d/done.fish"
+    mode: "0644"
+
+- name: Get the starship prompt
+  ansible.builtin.include_tasks:
+    file: "starship.yml"

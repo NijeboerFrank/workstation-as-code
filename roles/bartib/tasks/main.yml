@@ -1,0 +1,26 @@
+---
+- name: Get bartib
+  ansible.builtin.git:
+    repo: "{{ bartib_remote_repo }}"
+    dest: "{{ bartib_source_dir }}"
+    single_branch: true
+    version: master
+
+- name: Install local bartib
+  community.general.cargo:
+    name: bartib
+    path: "{{ bartib_source_dir }}"
+
+- name: Link the bartib completions from there
+  ansible.builtin.file:
+    src: "{{ bartib_source_dir }}/misc/bartib.fish"
+    dest: "{{ xdg_config_dir }}/fish/completions/bartib.fish"
+    state: link
+    force: true
+
+- name: Install the bartib fish file
+  ansible.builtin.template:
+    src: "bartib.fish"
+    dest: "{{ xdg_config_dir }}/fish/conf.d/bartib.fish"
+    mode: "0644"
+    force: true

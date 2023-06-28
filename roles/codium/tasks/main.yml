@@ -1,0 +1,38 @@
+---
+- name: Enable the VSCodium Repository
+  become: true
+  ansible.builtin.yum_repository:
+    name: gitlab.com_paulcarroty_vscodium_repo
+    description: The VSCodium repository
+    baseurl: https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/rpms/
+    gpgkey: https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg
+    gpgcheck: 1
+    enabled: 1
+    repo_gpgcheck: 1
+    metadata_expire: 1h
+
+- name: Install VSCodium
+  become: true
+  ansible.builtin.dnf:
+    name:
+      - codium
+    state: present
+
+- name: Make sure that the VSCodium/User directory exists
+  ansible.builtin.file:
+    path: "{{ xdg_config_dir }}/VSCodium/User"
+    state: directory
+    mode: "0744"
+
+- name: Install the configuration files
+  ansible.builtin.template:
+    src: "{{ item }}.json.j2"
+    dest: "{{ xdg_config_dir }}/VSCodium/User/{{ item }}.json"
+    mode: "0644"
+  loop:
+    - settings
+    - keybindings
+
+- name: Install extensions
+  ansible.builtin.include_tasks:
+    file: "extensions.yml"

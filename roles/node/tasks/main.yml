@@ -1,0 +1,14 @@
+- name: Install node.js
+  become: true
+  ansible.builtin.dnf:
+    name: nodejs
+    state: present
+  notify:
+    - "node : Create npm global directory"
+    - "node : Set npm global prefix"
+
+- name: Install npm
+  become: true
+  ansible.builtin.dnf:
+    name: npm
+    state: present

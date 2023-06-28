@@ -1,0 +1,9 @@
+- name: Create npm global directory
+  ansible.builtin.file:
+    path: "{{ software_dir }}/npm-global"
+    state: directory
+    mode: "0755"
+
+- name: Set npm global prefix
+  ansible.builtin.command: npm config set prefix '{{ software_dir }}/npm-global'
+  changed_when: false

@@ -1,7 +1,0 @@
-- name: Check npm
-  include_tasks: "{{ languages_dir }}/node.yml"
-
-- name: Install yaml lang server
-  community.general.npm:
-    name: yaml-language-server
-    global: true

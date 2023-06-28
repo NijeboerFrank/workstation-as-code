@@ -1,0 +1,10 @@
+# Todo.sh config
+
+## Standard configuration
+user_bin: ~/.local
+user_home: ~
+
+## Location where the todo.sh script will be installed
+todo_sh_location: "{{ user_bin }}"
+## Directory where the todo.txt files will be stored
+todo_sh_dir: "{{ user_home }}"
