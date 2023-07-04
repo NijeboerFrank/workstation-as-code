@@ -21,3 +21,5 @@ fonts:
   - { name: Droid Sans Mono, url: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/DroidSansMono.zip, glob: "*Droid*Sans*Mono*Nerd*" }
   - { name: Fura Mono, url: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/FiraMono.zip, glob: "*Fura*Mono*Nerd*" }
   - { name: Fira Code, url: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/FiraCode.zip, glob: "*Fira*Code*Nerd*" }
+  - { name: JetBrains Mono, url: https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/JetBrainsMono.zip, glob: "*JetBrains*Mono*Nerd*" }
+
