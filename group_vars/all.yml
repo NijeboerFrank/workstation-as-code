@@ -1,5 +1,4 @@
 user_home: "{{ '~' | expanduser}}"
 user_bin: "{{ user_home }}/.local/bin"
-wac_dir: "{{ user_home }}/workstation-as-code"
 languages_dir: "{{ wac_dir }}/roles/languages/tasks"
 xdg_config_dir: "{{ user_home }}/.config"

@@ -1,6 +1,9 @@
 bootstrap:
 	ansible-playbook -i hosts -K bootstrap.yml
 
+dependencies:
+	ansible-galaxy install -r requirements.yml
+
 format:
 	prettier --prose-wrap always --print-width 79 --loglevel silent -w "**.md"
 
