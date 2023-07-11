@@ -2,4 +2,3 @@ group_vars/local.yml
 private_config.yml
 
 *.retry
-docs/
