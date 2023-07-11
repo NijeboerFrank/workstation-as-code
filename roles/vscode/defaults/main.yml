@@ -1,0 +1,7 @@
+vscode_extensions:
+  - "eamodio.gitlens"
+  - "ms-python.python"
+  - "piousdeer.adwaita-theme"
+  - "PKief.material-icon-theme"
+  - "redhat.ansible"
+  - "redhat.vscode-yaml"

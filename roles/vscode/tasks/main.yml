@@ -1,0 +1,38 @@
+---
+- name: Enable the VSCode Repository
+  become: true
+  ansible.builtin.yum_repository:
+    name: vscode_repo
+    description: The Visual Studio Code repository
+    baseurl: https://packages.microsoft.com/yumrepos/vscode
+    gpgkey: https://packages.microsoft.com/keys/microsoft.asc
+    gpgcheck: 1
+    enabled: 1
+    repo_gpgcheck: 1
+    metadata_expire: 1h
+
+- name: Install VSCode
+  become: true
+  ansible.builtin.dnf:
+    name:
+      - code
+    state: present
+
+- name: Make sure that the Code/User directory exists
+  ansible.builtin.file:
+    path: "{{ xdg_config_dir }}/Code/User"
+    state: directory
+    mode: "0744"
+
+- name: Install the configuration files
+  ansible.builtin.template:
+    src: "{{ item }}.json.j2"
+    dest: "{{ xdg_config_dir }}/Code/User/{{ item }}.json"
+    mode: "0644"
+  loop:
+    - settings
+    - keybindings
+
+- name: Install extensions
+  ansible.builtin.include_tasks:
+    file: "extensions.yml"

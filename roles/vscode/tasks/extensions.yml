@@ -1,0 +1,5 @@
+- name: Install the extensions
+  ansible.builtin.command: "code --install-extension {{ item }}"
+  register: ext_install
+  changed_when: '"already installed." not in ext_install.stdout'
+  loop: "{{ vscode_extensions }}"

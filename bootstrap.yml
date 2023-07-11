@@ -16,3 +16,4 @@
     - { role: tailscale, tags: ['tailscale'] }
     - { role: todo_sh, tags: ['todo_sh'] }
     - { role: update, tags: ['update'] }
+    - { role: vscode, tags: ['vscode'] }
